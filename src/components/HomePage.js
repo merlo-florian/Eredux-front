@@ -2,9 +2,9 @@ import { React, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 const HomePage = () => {
-    /*const [authenticated, setauthenticated] = useState(null);
+   /* const [authenticated, setauthenticated] = useState(null);
     useEffect(() => {
-        const loggedInUser = localStorage.getItem("authenticated");
+        const loggedInUser = (localStorage.getItem("authenticated") === 'true');
         if (loggedInUser) {
             setauthenticated(loggedInUser);
         }

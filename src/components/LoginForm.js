@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from './FormikControl';
@@ -6,8 +6,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
-    const navigate = useNavigate();
 
+    const [authenticated, setauthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated") || false));
+    const navigate = useNavigate();
     const initialValues = {
         email: '',
         password: ''
@@ -41,7 +42,7 @@ function LoginForm() {
                 console.log(error);
             })
             .finally(function () {
-                
+
             });
     }
     return (
