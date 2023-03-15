@@ -3,8 +3,11 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from './FormikControl';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+    const navigate = useNavigate();
+
     const initialValues = {
         email: '',
         password: ''
@@ -23,15 +26,22 @@ function LoginForm() {
         let ext = splitAt[1].split('.')[1];
         axios.get('http://localhost:3000/api/get/user_by_email/' + name + '/' + domain + '/' + ext)
             .then(function (response) {
-                // handle success
                 console.log(response);
+                if (response.data.length > 0) {
+                    if (values.password == response.data[0].password) {
+                        navigate('/home');
+                    } else {
+                        alert('Identifiants incorrects');
+                    }
+                } else {
+                    alert('Identifiants incorrects');
+                }
             })
             .catch(function (error) {
-                // handle error
                 console.log(error);
             })
             .finally(function () {
-                // always executed
+                
             });
     }
     return (
